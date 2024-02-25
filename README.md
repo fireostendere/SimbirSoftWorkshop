@@ -24,6 +24,12 @@ pip install -r requirements.txt
 pytest --browser firefox
 ```
 
+Для запуска тестов для другого окружения нужно использовать комманду `--base_url`. Вот пример команды:
+
+```
+pytest --base_url https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager
+```
+
 ## Тестирование
 
 Для запуска тестов используйте команду:

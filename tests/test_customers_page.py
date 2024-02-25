@@ -22,7 +22,9 @@ def test_sorted_by_first_name(app: Any) -> None:
 def test_delete_customer(app: Any) -> None:
     customers_page = app.open_customers_page()
     old_list_of_customers = customers_page.get_first_name_list()
-    deleted_name = customers_page.delete_customer_closest_to_average()
+    closest_name = customers_page.get_closest_to_average_name(old_list_of_customers)
+    index = customers_page.get_index_of_name(closest_name)
+    customers_page.click_delete_button(index)
     new_list_of_customers = customers_page.get_first_name_list()
-    old_list_of_customers.remove(deleted_name)
+    old_list_of_customers.remove(closest_name)
     assert old_list_of_customers == new_list_of_customers, 'Customer was not deleted'
