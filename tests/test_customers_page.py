@@ -18,7 +18,7 @@ def test_sorted_by_first_name(app: Any) -> None:
 
 @allure.feature('List page')
 @allure.story('Delete customer')
-@allure.title('Delete customer closest to average age and check it')
+@allure.title('Delete customer closest to average name and check it')
 def test_delete_customer(app: Any) -> None:
     customers_page = app.open_customers_page()
     old_list_of_customers = customers_page.get_first_name_list()
