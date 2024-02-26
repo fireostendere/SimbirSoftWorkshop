@@ -19,15 +19,14 @@ class AddCustPage(BasePage):
 
     @allure.step('fill customer form with first name: {first_name}, last name: {last_name}, and postcode: {postcode}')
     def fill_new_customer(self, first_name: str, last_name: str, postcode: int) -> None:
-        self.wait_for_element(self._FIRST_NAME)
+        self.presence_element(self._FIRST_NAME)
         self.type(self._FIRST_NAME, first_name)
         self.type(self._LAST_NAME, last_name)
         self.type(self._POST_CODE, str(postcode))
 
     @allure.step('click add customer button')
     def click_add_customer(self) -> None:
-        add_customer_button = self.wait_for_element(self._ADD_CUSTOMER_BUTTON)
-        add_customer_button.click()
+        self.presence_element(self._ADD_CUSTOMER_BUTTON).click()
 
     @allure.step('get alert text')
     def get_alert_text(self) -> Union[str, None]:

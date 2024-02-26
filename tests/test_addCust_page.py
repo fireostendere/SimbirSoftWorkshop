@@ -7,9 +7,9 @@ from typing import Any
 @allure.feature('addCust page')
 @allure.story('Add customer')
 @allure.title('Add customer and check alert message')
-def test_add_customer(app: Any, open_add_customer_page) -> None:
+def test_add_customer(app: Any, customer_page_fixture) -> None:
     allert_pattern = r'Customer added successfully with customer id :(\d+)'
-    add_customer_page = open_add_customer_page
+    add_customer_page = customer_page_fixture
     first_name = app.helper.get_random_last_name()
     postcode = app.helper.get_random_postcode()
     last_name = app.helper.convert_postcode_to_name(postcode)

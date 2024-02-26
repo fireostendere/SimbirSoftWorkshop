@@ -21,8 +21,7 @@ class ListPage(BasePage):
         """
         This method clicks the sort button on the page.
         """
-        sort_button = self.wait_for_element(self._FIRST_NAME_BUTTON)
-        sort_button.click()
+        self.presence_element(self._FIRST_NAME_BUTTON).click()
 
     @allure.step('get first name list')
     def get_first_name_list(self) -> List[str]:
