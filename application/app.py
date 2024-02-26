@@ -5,6 +5,7 @@ from selenium.webdriver.remote.webdriver import WebDriver
 from pages.addCust_page import AddCustPage
 from pages.list_page import ListPage
 from pages.base_page import BasePage
+from helper import Helper
 
 
 class Application:
@@ -14,6 +15,7 @@ class Application:
         self.add_cust_page = AddCustPage(self)
         self.list_page = ListPage(self)
         self.base_page = BasePage(self)
+        self.helper = Helper()
 
     def construct_url(self, path: str = '') -> str:
         return self.base_url + path

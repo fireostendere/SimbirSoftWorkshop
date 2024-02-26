@@ -16,7 +16,7 @@ class BasePage:
         """
         return WebDriverWait(self.driver, timeout).until(ec.presence_of_element_located(locator))
 
-    def wait_for_alert(self, timeout: int = 5) -> bool:
+    def is_alert_present(self, timeout: int = 5) -> bool:
         """
         Wait for an alert to be present on the page.
         """
