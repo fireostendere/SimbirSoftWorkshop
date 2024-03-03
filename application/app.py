@@ -1,19 +1,21 @@
-from typing import Optional
 import allure
 
 from selenium.webdriver.remote.webdriver import WebDriver
 
 from pages.addCust_page import AddCustPage
 from pages.list_page import ListPage
+from pages.base_page import BasePage
+from helper import Helper
 
 
 class Application:
-    def __init__(self, driver: WebDriver):
+    def __init__(self, driver: WebDriver, base_url: str):
         self.driver = driver
-        self.driver.implicitly_wait(2)
-        self.base_url = 'https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager'
-        self.add_cust_page: Optional[AddCustPage] = None
-        self.list_page: Optional[ListPage] = None
+        self.base_url = base_url
+        self.add_cust_page = AddCustPage(self)
+        self.list_page = ListPage(self)
+        self.base_page = BasePage(self)
+        self.helper = Helper()
 
     def construct_url(self, path: str = '') -> str:
         return self.base_url + path
@@ -21,13 +23,15 @@ class Application:
     @allure.step("Open add customer page")
     def open_add_customer_page(self) -> AddCustPage:
         self.driver.get(self.construct_url("/addCust"))
-        if not self.add_cust_page:
-            self.add_cust_page = AddCustPage(self)
         return self.add_cust_page
 
     @allure.step("Open customers page")
     def open_customers_page(self) -> ListPage:
         self.driver.get(self.construct_url("/list"))
-        if not self.list_page:
-            self.list_page = ListPage(self)
         return self.list_page
+
+    @allure.step("Open base page")
+    def open_base_page(self) -> BasePage:
+        self.driver.get(self.base_url)
+        return self.base_page
+
