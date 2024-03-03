@@ -10,13 +10,13 @@ class BasePage:
     def __init__(self, app) -> None:
         self.driver: WebDriver = app.driver
 
-    def wait_for_element(self, locator, timeout=5):
+    def presence_element(self, locator, timeout=5):
         """
         Wait for the element at the given locator to be present in the DOM.
         """
         return WebDriverWait(self.driver, timeout).until(ec.presence_of_element_located(locator))
 
-    def wait_for_alert(self, timeout: int = 5) -> bool:
+    def is_alert_present(self, timeout: int = 5) -> bool:
         """
         Wait for an alert to be present on the page.
         """
@@ -36,7 +36,7 @@ class BasePage:
         """
         This method types the given value into the field identified by the locator.
         """
-        field = self.wait_for_element(locator)
+        field = self.presence_element(locator)
         current_value_in_field = field.get_attribute('value')
         if current_value_in_field != value:
             field.click()

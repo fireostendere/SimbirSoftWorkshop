@@ -48,6 +48,20 @@ def app(request: FixtureRequest) -> Application:
     driver.quit()
 
 
+@pytest.fixture
+def customer_page_fixture(app):
+    add_customer_page = app.open_add_customer_page()
+    yield add_customer_page
+    if add_customer_page.is_alert_present():
+        add_customer_page.accept_alert()
+
+
+@pytest.fixture
+def list_page_fixture(app):
+    list_page = app.open_customers_page()
+    yield list_page
+
+
 @pytest.hookimpl(tryfirst=True)
 def pytest_runtest_makereport(item, call):
     if call.when == 'call' and call.excinfo is not None:

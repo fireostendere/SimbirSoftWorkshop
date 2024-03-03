@@ -21,8 +21,7 @@ class ListPage(BasePage):
         """
         This method clicks the sort button on the page.
         """
-        sort_button = self.wait_for_element(self._FIRST_NAME_BUTTON)
-        sort_button.click()
+        self.presence_element(self._FIRST_NAME_BUTTON).click()
 
     @allure.step('get first name list')
     def get_first_name_list(self) -> List[str]:
@@ -32,25 +31,6 @@ class ListPage(BasePage):
         first_name_fields = self.wait_for_elements(self._FIRST_NAME_FIELDS)
         names = [field.text for field in first_name_fields]
         return names
-
-    @allure.step('get closest to average name')
-    def get_closest_to_average_name(self, names) -> str:
-        """
-        This method retrieves the name whose length is closest to the average name length.
-        """
-        lengths = [len(name) for name in names]
-        average_length = sum(lengths) / len(lengths)
-        closest_name = min(names, key=lambda name: abs(len(name) - average_length))
-        return closest_name
-
-    @allure.step('get index of name')
-    def get_index_of_name(self, name: str) -> int:
-        """
-        This method retrieves the index of the given name in the list of names on the page.
-        """
-        names = self.get_first_name_list()
-        index = names.index(name)
-        return index
 
     @allure.step('click delete button')
     def click_delete_button(self, index: int) -> None:
